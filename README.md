@@ -5,57 +5,53 @@ This is useful when you have object A, many object B with foreign key on A, many
 ## Install
 
 ```html
-<script src="https://unpkg.com/htmx-ext-multi-swap@2.0.0/multi-swap.js"></script>
+<script src="TODO"></script>
 ```
 
 ## Usage
 
 1. Set `hx-ext="nested-form""` attribute on `<form>`
-2. On each level of nested data set `data-nested="myExampleObject"`, e.g. `hx-swap="multi:#id1,#id2:outerHTML,#id3:afterend"`.
+2. On each level of nested data set `data-nested="myExampleObject"`
 
 ## Example Form
+
+This has a lot removed to show a simple example, but still has Django templating specific loops and forms, to show how OneToMany relationships work with data-nested
 
 ```html
 
 <form hx-post="/allergy/1" hx-ext="nested-form">
-    {% csrf_token %}
-    <fieldset data-fieldsetType="allergy">
-        <legend>Allergy</legend>
+    <div data-nested="allergy">
         
         {{ allergyFormAndChildren.allergy_form.as_p }}
  
         {% for note in allergyFormAndChildren.note_list %}
-            <fieldset data-fieldsetType="note">
-                <legend>Note</legend>
+            <div data-nested="note">
                 {{note.note_form.as_p}}
-            </fieldset>
+            </div>
         {% endfor %}
 
         {% for reaction in allergyFormAndChildren.reaction_list %}
-            <fieldset data-fieldsetType="reaction">
-                <legend>Reaction</legend>
+            <div data-nested="reaction">
 
                 {{reaction.reaction_form.as_p}}
 
                 {% for reactionNote in reaction.reactionNote_list %}
-                    <fieldset data-fieldsetType="reactionNote">
-                        <legend>Reaction Note</legend>
+                    <div data-nested="reactionNote">
                         {{ reactionNote.reactionNote_form.as_p }}
-                    </fieldset>
+                    </div>
                 {% endfor %}
 
                 {% for manifestation in reaction.manifestation_list %}
-                    <fieldset data-fieldsetType="manifestation">
-                        <legend>Manifestation</legend>
+                    <div data-nested="manifestation">
                         {{ manifestation.manifestation_form.as_p }}
-                    </fieldset>
+                    </div>
                 {% endfor %}
-            </fieldset>
 
+            </div>
         {% endfor %} 
 
         <input type="submit" value="Save Allergy">
-    </fieldset>
+    </div>
 </form>
 
 ```
