@@ -11,7 +11,7 @@ This is useful when you have object A, many object B with foreign key on A, many
 ## Usage
 
 1. Set `hx-ext="json-data-nested"` attribute on `<form>`
-2. On each level of nested data set `data-nested="myExampleObject"`
+2. On each element containing a level of nested data set`data-nested="myExampleObject"`
 
 ## Form Example/Test
 
