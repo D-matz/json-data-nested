@@ -1,3 +1,4 @@
+
 function recurseChildren(element) {
     const leaf = {"formName": element.getAttribute('data-nested'), "formFields": []} //the form on this level of nested data, which has a name and list of key/value pairs
     const children = [] //the html elements with data-nested inside this one
@@ -34,7 +35,7 @@ function recurseChildren(element) {
 
   (function() {
   let api
-  htmx.defineExtension('nested-form', {
+  htmx.defineExtension('json-data-nested', {
     init: function(apiRef) {
       api = apiRef
     },
@@ -52,10 +53,13 @@ function recurseChildren(element) {
       const nestedFormData = recurseChildren(elt)
       
       //maybe django specific: set csrf, ignore first level of form
-      if(true)
+      if(nestedFormData['leaf']['formFields'][0])
       {
-        xhr.setRequestHeader("X-CSRFToken", nestedFormData['leaf']['formFields'][0]['csrfmiddlewaretoken']);
-        return (JSON.stringify(nestedFormData['children'][0]))
+		  if(nestedFormData['leaf']['formFields'][0]['csrfmiddlewaretoken'])
+		  {
+			xhr.setRequestHeader("X-CSRFToken", nestedFormData['leaf']['formFields'][0]['csrfmiddlewaretoken']);
+			return (JSON.stringify(nestedFormData['children'][0]))
+		  }
       }
 
       return (JSON.stringify(nestedFormData))
