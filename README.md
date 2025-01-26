@@ -15,7 +15,7 @@ This is useful when you have object A, many object B with foreign key on A, many
 
 ## Form Example/Test
 
-See example.html for a nested form that uses <fieldset data-nested="allergy">, <fieldset data-nested="reaction">, etc., to encode nested data instead of the name attribute. To see test: pip install dependencies, run python test.py, open localhost, submit form. The form data should be returned from server as json.
+See example.html for a nested form that uses `<fieldset data-nested="allergy">`, `<fieldset data-nested="reaction">`, etc., to encode nested data instead of the name attribute. To see test: pip install dependencies, run python test.py, open localhost, submit form. The form data should be returned from server as json.
 
 ## Django Example
 
