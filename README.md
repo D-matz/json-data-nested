@@ -1,11 +1,11 @@
 This extension allows you to submit nested data from a form. Each element with a data-nested attribute will be treated as a layer of nested data.
 
-This is useful when you have object A, many object B with foreign key on A, many object C with a foreign key on one of the object Bs, and so on. As opposed to keeping track of relationships by managing the name attribute for each field, adding data-
+This is useful when you have object A, many object B with foreign key on A, many object C with a foreign key on one of the object Bs, and so on. As opposed to keeping track of relationships by managing the name attribute for each field, you can add data-nested to each fieldset or sub fieldset, and the extension will collect field values based on which data-nested elements they're in.
 
 ## Install
 
 ```html
-<script src="TODO"></script>
+<script src="https://cdn.jsdelivr.net/gh/D-matz/json-data-nested/json-data-nested.js"></script>
 ```
 
 ## Usage
@@ -13,9 +13,13 @@ This is useful when you have object A, many object B with foreign key on A, many
 1. Set `hx-ext="nested-form""` attribute on `<form>`
 2. On each level of nested data set `data-nested="myExampleObject"`
 
-## Example Form
+## Form Example/Test
 
-This has a lot removed to show a simple example, but still has Django templating specific loops and forms, to show how OneToMany relationships work with data-nested
+See example.html for a nested form that uses <fieldset data-nested="allergy">, <fieldset data-nested="reaction">, etc., to encode nested data instead of the name attribute. To see test: pip install dependencies, run python test.py, open localhost, submit form. The form data should be returned from server as json.
+
+## Django Example
+
+This has a lot removed to show a simple example, but still has Django templating specific loops and forms, to show how Many-to-one relationships work with data-nested
 
 ```html
 
@@ -55,10 +59,6 @@ This has a lot removed to show a simple example, but still has Django templating
 </form>
 
 ```
-
-## Example Repo
-
-The above example has a lot removed to provide a simple example. See LINK for 
 
 ### Notes and limitations
 

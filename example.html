@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>click submit for nested data</title>
+    <script src="https://unpkg.com/htmx.org"></script>
+    <script src="https://cdn.jsdelivr.net/gh/D-matz/json-data-nested/json-data-nested.js"></script>
+</head>
+<body>
+    <form hx-post="/" hx-ext="json-data-nested">
+        <fieldset data-nested="allergy">
+			<legend>allergy</legend>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" value="peanut">
+            <label for="severity">Severity:</label>
+            <input type="text" name="severity" id="severity" value="bad">
+			<label for="status">Status:</label>
+			<select name="status" id="status">
+			  <option value="Active">Active</option>
+			  <option value="Inactive">Inactive</option>
+			  <option value="Entered-in-error">Entered in error</option>
+			</select>
+		
+
+            <fieldset data-nested="note">
+				<legend>note 1</legend>
+                <label for="note_text">Note:</label>
+                <textarea name="note_text" id="note_text">don't eat peanuts</textarea>
+            </fieldset>
+			
+			<fieldset data-nested="note">
+				<legend>note 2</legend>
+                <label for="note_text">Note:</label>
+                <textarea name="note_text" id="note_text1">tree nuts are ok</textarea>
+            </fieldset>
+
+            <fieldset data-nested="reaction">
+				<legend>reaction 1</legend>
+                <label for="substance">Substance:</label>
+                <input type="text" name="substance" id="substance" value="peanut oil">
+
+                <fieldset data-nested="manifestation">
+					<legend>manifestation 1</legend>
+                    <label for="manifestation_detail">Manifestation:</label>
+                    <input type="text" name="manifestation_detail" id="manifestation_detail" value="hives">
+                </fieldset>
+            </fieldset>
+			
+			<fieldset data-nested="reaction">
+				<legend>reaction 2</legend>
+                <label for="substance">Substance:</label>
+                <input type="text" name="substance" id="substance2" value="Reese's Pieces">
+
+                <fieldset data-nested="manifestation 2">
+					<legend>manifestation 2</legend>
+                    <label for="manifestation_detail">Manifestation:</label>
+                    <input type="text" name="manifestation_detail" id="manifestation_detail2" value="runny nose">
+                </fieldset>
+				<fieldset data-nested="manifestation 3">
+					<legend>manifestation 3</legend>
+                    <label for="manifestation_detail">Manifestation:</label>
+                    <input type="text" name="manifestation_detail" id="manifestation_detail3" value="sore throat">
+                </fieldset>
+            </fieldset>
+
+
+            <input type="submit" value="Test Submit">
+        </fieldset>
+    </form>
+</body>
+</html>
