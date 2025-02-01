@@ -23,7 +23,7 @@ This has a lot removed to show a simple example, but still has Django templating
 
 ```html
 
-<form hx-post="/allergy/1" hx-ext="nested-form">
+<form hx-post="/allergy/1" hx-ext="hx-ext="json-data-nested">
     <div data-nested="allergy">
         
         {{ allergyFormAndChildren.allergy_form.as_p }}
