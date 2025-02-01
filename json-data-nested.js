@@ -48,19 +48,20 @@ function recurseChildren(element) {
 
     encodeParameters: function(xhr, parameters, elt) {
       xhr.overrideMimeType('text/json')
-//      console.log("start with", elt)
 
       const nestedFormData = recurseChildren(elt)
       
-      //maybe django specific: set csrf, ignore first level of form
-      if(nestedFormData['leaf']['formFields'][0])
-      {
-		  if(nestedFormData['leaf']['formFields'][0]['csrfmiddlewaretoken'])
-		  {
-			xhr.setRequestHeader("X-CSRFToken", nestedFormData['leaf']['formFields'][0]['csrfmiddlewaretoken']);
-			return (JSON.stringify(nestedFormData['children'][0]))
-		  }
+      if (elt.hasAttribute('data-djangoCSRF')) {
+        // Django specific: set csrf, ignore first level of form
+        if (nestedFormData['leaf']['formFields'][0]) {
+          if (nestedFormData['leaf']['formFields'][0]['csrfmiddlewaretoken']) {
+            xhr.setRequestHeader("X-CSRFToken", nestedFormData['leaf']['formFields'][0]['csrfmiddlewaretoken']);
+            return (JSON.stringify(nestedFormData['children'][0]))
+          }
+        }
       }
+
+
 
       return (JSON.stringify(nestedFormData))
     }
